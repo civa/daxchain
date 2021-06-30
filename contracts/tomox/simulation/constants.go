@@ -9,21 +9,21 @@ import (
 )
 
 var (
-	BaseTOMO    = big.NewInt(0).Mul(big.NewInt(10), big.NewInt(100000000000000000)) // 1 SDX
+	BaseTOMO    = big.NewInt(0).Mul(big.NewInt(10), big.NewInt(100000000000000000)) // 1 DAX
 	RpcEndpoint = "http://127.0.0.1:8501/"
 	MainKey, _  = crypto.HexToECDSA(os.Getenv("MAIN_ADDRESS_KEY"))
 	MainAddr    = crypto.PubkeyToAddress(MainKey.PublicKey) //0x17F2beD710ba50Ed27aEa52fc4bD7Bda5ED4a037
 
 	// TRC21 Token
-	MinTRC21Apply   = big.NewInt(0).Mul(big.NewInt(10), BaseTOMO) // 10 SDX
+	MinTRC21Apply   = big.NewInt(0).Mul(big.NewInt(10), BaseTOMO) // 10 DAX
 	TRC21TokenCap   = big.NewInt(0).Mul(big.NewInt(1000000000000), BaseTOMO)
 	TRC21TokenFee   = big.NewInt(0)
-	TomoXListingFee = big.NewInt(0).Mul(big.NewInt(1000), BaseTOMO) // 1000 SDX
+	TomoXListingFee = big.NewInt(0).Mul(big.NewInt(1000), BaseTOMO) // 1000 DAX
 
 	// TOMOX
 	MaxRelayers               = big.NewInt(200)
 	MaxTokenList              = big.NewInt(200)
-	MinDeposit                = big.NewInt(0).Mul(big.NewInt(25000), BaseTOMO) // 25000 SDX
+	MinDeposit                = big.NewInt(0).Mul(big.NewInt(25000), BaseTOMO) // 25000 DAX
 	CollateralDepositRate     = big.NewInt(150)
 	CollateralLiquidationRate = big.NewInt(110)
 	CollateralRecallRate      = big.NewInt(200)

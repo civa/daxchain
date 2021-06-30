@@ -126,7 +126,7 @@ contract RelayerRegistration {
         require(RESIGN_REQUESTS[coinbase] == 0, "The relayer has been requested to close.");
         require(ActiveRelayerCount < MaximumRelayers, "Maximum relayers registered");
 
-        // check valid tokens, token must pair with sdx(x/SDX)
+        // check valid tokens, token must pair with dax(x/DAX)
         require(validateTokens(fromTokens, toTokens) == true, "Invalid quote tokens");
 
         RELAYER_COINBASES[RelayerCount] = coinbase;
@@ -224,7 +224,7 @@ contract RelayerRegistration {
 
 
     function depositMore(address coinbase) public payable relayerOwnerOnly(coinbase) onlyActiveRelayer(coinbase) notForSale(coinbase) nonZeroValue {
-        require(msg.value >= 1 ether, "At least 1 SDX is required for a deposit request");
+        require(msg.value >= 1 ether, "At least 1 DAX is required for a deposit request");
         RELAYER_LIST[coinbase]._deposit = RELAYER_LIST[coinbase]._deposit.add(msg.value);
         emit UpdateEvent(RELAYER_LIST[coinbase]._deposit,
                          RELAYER_LIST[coinbase]._tradeFee,
@@ -375,7 +375,7 @@ contract RelayerRegistration {
             return true;
         }
 
-        // get tokens that paired with sdx
+        // get tokens that paired with dax
         for (uint i = 0; i < RELAYER_LIST[coinbase]._toTokens.length; i++) {
             if (RELAYER_LIST[coinbase]._toTokens[i] == tomoNative) {
                 tomoPairs[countPair] = RELAYER_LIST[coinbase]._fromTokens[i];

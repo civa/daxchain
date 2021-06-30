@@ -290,7 +290,7 @@ func (tomox *TomoX) GetAveragePriceLastEpoch(chain consensus.ChainContext, state
 	return nil, nil
 }
 
-// return tokenQuantity (after convert from SDX to token), tokenPriceInTOMO, error
+// return tokenQuantity (after convert from DAX to token), tokenPriceInTOMO, error
 func (tomox *TomoX) ConvertTOMOToToken(chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, token common.Address, quantity *big.Int) (*big.Int, *big.Int, error) {
 	if token.String() == common.TomoNativeAddress {
 		return quantity, common.BasePrice, nil

@@ -27,22 +27,22 @@ Read more about us on:
 
 ## Building the source
 
-Tomochain provides a client binary called `sdx` for both running a masternode and running a full-node.
-Building `sdx` requires both a Go (1.7+) and C compiler; install both of these.
+Tomochain provides a client binary called `dax` for both running a masternode and running a full-node.
+Building `dax` requires both a Go (1.7+) and C compiler; install both of these.
 
 Once the dependencies are installed, just run the below commands:
 
 ```bash
 $ git clone https://github.com/tomochain/tomochain tomochain
 $ cd tomochain
-$ make sdx
+$ make dax
 ```
 
 Alternatively, you could quickly download our pre-complied binary from our [github release page](https://github.com/tomochain/tomochain/releases)
 
-## Running `sdx`
+## Running `dax`
 
-### Running a sdx masternode
+### Running a dax masternode
 
 Please refer to the [official documentation](https://docs.tomochain.com/get-started/run-node/) on how to run a node if your goal is to run a masternode.
 The recommanded ways of running a node and applying to become a masternode are explained in detail there.
@@ -55,12 +55,12 @@ If you'd like to experiment with smart contract creation and DApps, you might be
 In order to connect to one of the masternodes on the Testnet, just run the command below:
 
 ```bash
-$ sdx attach https://rpc.testnet.tomochain.com
+$ dax attach https://rpc.testnet.tomochain.com
 ```
 
 This will open the JavaScript console and let you query the blockchain directly via RPC.
 
-### Running `sdx` locally
+### Running `dax` locally
 
 #### Download genesis block
 $GENESIS_PATH : location of genesis file you would like to put
@@ -82,12 +82,12 @@ curl -L https://raw.githubusercontent.com/tomochain/tomochain/master/genesis/mai
 
 ```bash
 export DATA_DIR=/path/to/your/data/folder 
-mkdir -p $DATA_DIR/sdx
+mkdir -p $DATA_DIR/dax
 ```
 #### Initialize the chain from genesis
 
 ```bash
-sdx init $GENESIS_PATH --datadir $DATA_DIR
+dax init $GENESIS_PATH --datadir $DATA_DIR
 ```
 
 #### Initialize / Import accounts for the nodes's keystore
@@ -99,14 +99,14 @@ export KEYSTORE_DIR=path/to/keystore
 
 ##### Initialize new accounts
 ```bash
-sdx account new \
+dax account new \
   --password [YOUR_PASSWORD_FILE_TO_LOCK_YOUR_ACCOUNT] \
   --keystore $KEYSTORE_DIR
 ```
     
 ##### Import accounts
 ```bash
-sdx  account import [PRIVATE_KEY_FILE_OF_YOUR_ACCOUNT] \
+dax  account import [PRIVATE_KEY_FILE_OF_YOUR_ACCOUNT] \
      --keystore $KEYSTORE_DIR \
      --password [YOUR_PASSWORD_FILE_TO_LOCK_YOUR_ACCOUNT]
 ```
@@ -114,7 +114,7 @@ sdx  account import [PRIVATE_KEY_FILE_OF_YOUR_ACCOUNT] \
 ##### List all available accounts in keystore folder
 
 ```bash
-sdx account list --datadir ./  --keystore $KEYSTORE_DIR
+dax account list --datadir ./  --keystore $KEYSTORE_DIR
 ```
 
 #### Start a node
@@ -130,7 +130,7 @@ sdx account list --datadir ./  --keystore $KEYSTORE_DIR
     
 ##### Let's start a node
 ```bash
-sdx  --syncmode "full" \    
+dax  --syncmode "full" \    
     --datadir $DATA_DIR --networkid $NETWORK_ID --port 30303 \   
     --keystore $KEYSTORE_DIR --password $PASSWORD \    
     --rpc --rpccorsdomain "*" --rpcaddr 0.0.0.0 --rpcport 8545 --rpcvhosts "*" \   
@@ -153,7 +153,7 @@ sdx  --syncmode "full" \
 --identity: your full-node's name.
 --password: your account's password.
 --networkid: our network ID.
---sdx-testnet: required when the networkid is testnet(89).
+--dax-testnet: required when the networkid is testnet(89).
 --port: your full-node's listening port (default to 30303)
 --rpc, --rpccorsdomain, --rpcaddr, --rpcport, --rpcvhosts: your full-node will accept RPC requests at 8545 TCP.
 --ws, --wsaddr, --wsport, --wsorigins: your full-node will accept Websocket requests at 8546 TCP.
@@ -168,7 +168,7 @@ sdx  --syncmode "full" \
 To see all flags usage
    
 ```bash
-sdx --help
+dax --help
 ```
 
 #### See your node on stats page

@@ -163,7 +163,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is SDX, quantity too small, taker BORROW",
+			"LendToken is DAX, quantity too small, taker BORROW",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,
@@ -181,7 +181,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"LendToken is not SDX, quantity too small, taker BORROW",
+			"LendToken is not DAX, quantity too small, taker BORROW",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,
@@ -200,7 +200,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is not SDX, no error, taker BORROW",
+			"LendToken is not DAX, no error, taker BORROW",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,
@@ -235,7 +235,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is not SDX, no error, taker INVEST",
+			"LendToken is not DAX, no error, taker INVEST",
 			GetSettleBalanceArg{
 				true,
 				Investing,
@@ -269,7 +269,7 @@ func TestGetSettleBalance(t *testing.T) {
 			false,
 		},
 		{
-			"LendToken is SDX, no error, taker invest",
+			"LendToken is DAX, no error, taker invest",
 			GetSettleBalanceArg{
 				true,
 				Investing,
@@ -304,7 +304,7 @@ func TestGetSettleBalance(t *testing.T) {
 		},
 
 		{
-			"LendToken is SDX, no error, taker Borrow",
+			"LendToken is DAX, no error, taker Borrow",
 			GetSettleBalanceArg{
 				true,
 				Borrowing,

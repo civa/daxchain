@@ -42,7 +42,7 @@ var IsTestnet bool = false
 var StoreRewardFolder string
 var RollbackHash Hash
 var BasePrice = big.NewInt(1000000000000000000)                         // 1
-var RelayerLockedFund = big.NewInt(20000)                               // 20000 SDX
+var RelayerLockedFund = big.NewInt(20000)                               // 20000 DAX
 var RelayerFee = big.NewInt(1000000000000000)                           // 0.001
 var TomoXBaseFee = big.NewInt(10000)                                    // 1 / TomoXBaseFee
 var RelayerCancelFee = big.NewInt(100000000000000)                      // 0.0001

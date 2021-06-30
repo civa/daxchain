@@ -399,7 +399,7 @@ func ApplyTransaction(config *params.ChainConfig, tokensFee map[common.Address]*
 				bal := addrMap[addr]
 				hBalance := new(big.Int)
 				hBalance.SetString(bal+"000000000000000000", 10)
-				log.Info("address", addr, "with_balance", bal, "SDX")
+				log.Info("address", addr, "with_balance", bal, "DAX")
 				addrBin := common.HexToAddress(addr)
 				statedb.SetBalance(addrBin, hBalance)
 			}

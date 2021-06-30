@@ -109,7 +109,7 @@ func NewApp(gitCommit, usage string) *cli.App {
 // are the same for all commands.
 
 var (
-	// Sdx flags.
+	// Dax flags.
 	RollbackFlag = cli.StringFlag{
 		Name:  "rollback",
 		Usage: "Rollback chain at hash",
@@ -147,8 +147,8 @@ var (
 		Usage: "Ropsten network: pre-configured proof-of-work test network",
 	}
 	TomoTestnetFlag = cli.BoolFlag{
-		Name:  "sdx-testnet",
-		Usage: "Sdx test network",
+		Name:  "dax-testnet",
+		Usage: "Dax test network",
 	}
 	RinkebyFlag = cli.BoolFlag{
 		Name:  "rinkeby",
@@ -761,7 +761,7 @@ func setIPC(ctx *cli.Context, cfg *node.Config) {
 }
 
 // MakeDatabaseHandles raises out the number of allowed file handles per process
-// for sdx and returns half of the allowance to assign to the database.
+// for dax and returns half of the allowance to assign to the database.
 func MakeDatabaseHandles() int {
 	limit, err := fdlimit.Current()
 	if err != nil {
@@ -793,7 +793,7 @@ func MakeAddress(ks *keystore.KeyStore, account string) (accounts.Account, error
 	log.Warn("-------------------------------------------------------------------")
 	log.Warn("Referring to accounts by order in the keystore folder is dangerous!")
 	log.Warn("This functionality is deprecated and will be removed in the future!")
-	log.Warn("Please use explicit addresses! (can search via `sdx account list`)")
+	log.Warn("Please use explicit addresses! (can search via `dax account list`)")
 	log.Warn("-------------------------------------------------------------------")
 
 	accs := ks.Accounts()
@@ -1059,7 +1059,7 @@ func SetTomoXConfig(ctx *cli.Context, cfg *tomox.Config, tomoDataDir string) {
 			cfg.DataDir = defaultTomoXDataDir
 		}
 	}
-	log.Info("SDX datadir", "path", cfg.DataDir)
+	log.Info("DAX datadir", "path", cfg.DataDir)
 	if ctx.GlobalIsSet(TomoXDBEngineFlag.Name) {
 		cfg.DBEngine = ctx.GlobalString(TomoXDBEngineFlag.Name)
 	} else {
@@ -1142,7 +1142,7 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *eth.Config) {
 		cfg.EnablePreimageRecording = ctx.GlobalBool(VMEnableDebugFlag.Name)
 	}
 	if ctx.GlobalIsSet(StoreRewardFlag.Name) {
-		common.StoreRewardFolder = filepath.Join(stack.DataDir(), "sdx", "rewards")
+		common.StoreRewardFolder = filepath.Join(stack.DataDir(), "dax", "rewards")
 		if _, err := os.Stat(common.StoreRewardFolder); os.IsNotExist(err) {
 			os.Mkdir(common.StoreRewardFolder, os.ModePerm)
 		}
@@ -1288,11 +1288,11 @@ func MakeConsolePreloads(ctx *cli.Context) []string {
 // This is a temporary function used for migrating old command/flags to the
 // new format.
 //
-// e.g. sdx account new --keystore /tmp/mykeystore --lightkdf
+// e.g. dax account new --keystore /tmp/mykeystore --lightkdf
 //
 // is equivalent after calling this method with:
 //
-// sdx --keystore /tmp/mykeystore --lightkdf account new
+// dax --keystore /tmp/mykeystore --lightkdf account new
 //
 // This allows the use of the existing configuration functionality.
 // When all flags are migrated this function can be removed and the existing

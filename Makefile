@@ -1,6 +1,6 @@
-.PHONY: sdx sdx-cross evm all test clean
-.PHONY: sdx-linux sdx-linux-386 sdx-linux-amd64 sdx-linux-mips64 sdx-linux-mips64le
-.PHONY: sdx-darwin sdx-darwin-386 sdx-darwin-amd64
+.PHONY: dax dax-cross evm all test clean
+.PHONY: dax-linux dax-linux-386 dax-linux-amd64 dax-linux-mips64 dax-linux-mips64le
+.PHONY: dax-darwin dax-darwin-386 dax-darwin-amd64
 
 GOBIN = $(shell pwd)/build/bin
 GOFMT = gofmt
@@ -10,10 +10,10 @@ GO_FILES := $(shell find $(shell go list -f '{{.Dir}}' $(GO_PACKAGES)) -name \*.
 
 GIT = git
 
-sdx:
-	go run build/ci.go install ./cmd/sdx
+dax:
+	go run build/ci.go install ./cmd/dax
 	@echo "Done building."d
-	@echo "Run \"$(GOBIN)/sdx\" to launch sdx."
+	@echo "Run \"$(GOBIN)/dax\" to launch dax."
 
 gc:
 	go run build/ci.go install ./cmd/gc
@@ -41,62 +41,62 @@ clean:
 
 # Cross Compilation Targets (xgo)
 
-sdx-cross: sdx-windows-amd64 sdx-darwin-amd64 sdx-linux
+dax-cross: dax-windows-amd64 dax-darwin-amd64 dax-linux
 	@echo "Full cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-*
+	@ls -ld $(GOBIN)/dax-*
 
-sdx-linux: sdx-linux-386 sdx-linux-amd64 sdx-linux-mips64 sdx-linux-mips64le
+dax-linux: dax-linux-386 dax-linux-amd64 dax-linux-mips64 dax-linux-mips64le
 	@echo "Linux cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-linux-*
+	@ls -ld $(GOBIN)/dax-linux-*
 
-sdx-linux-386:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/386 -v ./cmd/sdx
+dax-linux-386:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/386 -v ./cmd/dax
 	@echo "Linux 386 cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-linux-* | grep 386
+	@ls -ld $(GOBIN)/dax-linux-* | grep 386
 
-sdx-linux-amd64:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/amd64 -v ./cmd/sdx
+dax-linux-amd64:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/amd64 -v ./cmd/dax
 	@echo "Linux amd64 cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-linux-* | grep amd64
+	@ls -ld $(GOBIN)/dax-linux-* | grep amd64
 
-sdx-linux-mips:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips --ldflags '-extldflags "-static"' -v ./cmd/sdx
+dax-linux-mips:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips --ldflags '-extldflags "-static"' -v ./cmd/dax
 	@echo "Linux MIPS cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-linux-* | grep mips
+	@ls -ld $(GOBIN)/dax-linux-* | grep mips
 
-sdx-linux-mipsle:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mipsle --ldflags '-extldflags "-static"' -v ./cmd/sdx
+dax-linux-mipsle:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mipsle --ldflags '-extldflags "-static"' -v ./cmd/dax
 	@echo "Linux MIPSle cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-linux-* | grep mipsle
+	@ls -ld $(GOBIN)/dax-linux-* | grep mipsle
 
-sdx-linux-mips64:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64 --ldflags '-extldflags "-static"' -v ./cmd/sdx
+dax-linux-mips64:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64 --ldflags '-extldflags "-static"' -v ./cmd/dax
 	@echo "Linux MIPS64 cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-linux-* | grep mips64
+	@ls -ld $(GOBIN)/dax-linux-* | grep mips64
 
-sdx-linux-mips64le:
-	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64le --ldflags '-extldflags "-static"' -v ./cmd/sdx
+dax-linux-mips64le:
+	go run build/ci.go xgo -- --go=$(GO) --targets=linux/mips64le --ldflags '-extldflags "-static"' -v ./cmd/dax
 	@echo "Linux MIPS64le cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-linux-* | grep mips64le
+	@ls -ld $(GOBIN)/dax-linux-* | grep mips64le
 
-sdx-darwin: sdx-darwin-386 sdx-darwin-amd64
+dax-darwin: dax-darwin-386 dax-darwin-amd64
 	@echo "Darwin cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-darwin-*
+	@ls -ld $(GOBIN)/dax-darwin-*
 
-sdx-darwin-386:
-	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/386 -v ./cmd/sdx
+dax-darwin-386:
+	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/386 -v ./cmd/dax
 	@echo "Darwin 386 cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-darwin-* | grep 386
+	@ls -ld $(GOBIN)/dax-darwin-* | grep 386
 
-sdx-darwin-amd64:
-	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/amd64 -v ./cmd/sdx
+dax-darwin-amd64:
+	go run build/ci.go xgo -- --go=$(GO) --targets=darwin/amd64 -v ./cmd/dax
 	@echo "Darwin amd64 cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-darwin-* | grep amd64
+	@ls -ld $(GOBIN)/dax-darwin-* | grep amd64
 
-sdx-windows-amd64:
-	go run build/ci.go xgo -- --go=$(GO) -buildmode=mode -x --targets=windows/amd64 -v ./cmd/sdx
+dax-windows-amd64:
+	go run build/ci.go xgo -- --go=$(GO) -buildmode=mode -x --targets=windows/amd64 -v ./cmd/dax
 	@echo "Windows amd64 cross compilation done:"
-	@ls -ld $(GOBIN)/sdx-windows-* | grep amd64
+	@ls -ld $(GOBIN)/dax-windows-* | grep amd64
 gofmt:
 	$(GOFMT) -s -w $(GO_FILES)
 	$(GIT) checkout vendor

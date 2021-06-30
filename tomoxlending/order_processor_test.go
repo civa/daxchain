@@ -106,9 +106,9 @@ func Test_getCancelFee(t *testing.T) {
 	// tokenB has decimal 10^8
 	tomox.SetTokenDecimal(testTokenB, new(big.Int).Exp(big.NewInt(10), big.NewInt(8), nil))
 
-	// set tokenAPrice = 1 SDX
+	// set tokenAPrice = 1 DAX
 	tradingStateDb.SetMediumPriceBeforeEpoch(tradingstate.GetTradingOrderBookHash(testTokenA, common.HexToAddress(common.TomoNativeAddress)), common.BasePrice)
-	// set tokenBPrice = 1 SDX
+	// set tokenBPrice = 1 DAX
 	tradingStateDb.SetMediumPriceBeforeEpoch(tradingstate.GetTradingOrderBookHash(testTokenB, common.HexToAddress(common.TomoNativeAddress)), common.BasePrice)
 
 	l := New(tomox)
@@ -123,7 +123,7 @@ func Test_getCancelFee(t *testing.T) {
 		want *big.Int
 	}{
 		// LENDING TOKEN: testTokenA
-		// COLLATERAL TOKEN: SDX
+		// COLLATERAL TOKEN: DAX
 
 		// zero fee test: LEND
 		{
@@ -142,7 +142,7 @@ func Test_getCancelFee(t *testing.T) {
 
 		// zero fee test: BORROW
 		{
-			"TokenA/SDX zero fee test: BORROW",
+			"TokenA/DAX zero fee test: BORROW",
 			CancelFeeArg{
 				borrowFeeRate: common.Big0,
 				order: &lendingstate.LendingItem{
@@ -157,7 +157,7 @@ func Test_getCancelFee(t *testing.T) {
 
 		// test getCancelFee: LEND
 		{
-			"TokenA/SDX test getCancelFee:: LEND",
+			"TokenA/DAX test getCancelFee:: LEND",
 			CancelFeeArg{
 				borrowFeeRate: new(big.Int).SetUint64(30), // 30/10000= 0.3%
 				order: &lendingstate.LendingItem{
@@ -172,7 +172,7 @@ func Test_getCancelFee(t *testing.T) {
 
 		// test getCancelFee:: BORROW
 		{
-			"TokenA/SDX test getCancelFee:: BORROW",
+			"TokenA/DAX test getCancelFee:: BORROW",
 			CancelFeeArg{
 				borrowFeeRate: new(big.Int).SetUint64(30), // 30/10000= 0.3%
 				order: &lendingstate.LendingItem{
@@ -185,12 +185,12 @@ func Test_getCancelFee(t *testing.T) {
 			common.RelayerLendingCancelFee,
 		},
 
-		// LENDING TOKEN: SDX
+		// LENDING TOKEN: DAX
 		// COLLATERAL TOKEN: testTokenA
 
 		// zero fee test: LEND
 		{
-			"SDX/TokenA zero fee test: LEND",
+			"DAX/TokenA zero fee test: LEND",
 			CancelFeeArg{
 				borrowFeeRate: common.Big0,
 				order: &lendingstate.LendingItem{
@@ -205,7 +205,7 @@ func Test_getCancelFee(t *testing.T) {
 
 		// zero fee test: BORROW
 		{
-			"SDX/TokenA zero fee test: BORROW",
+			"DAX/TokenA zero fee test: BORROW",
 			CancelFeeArg{
 				borrowFeeRate: common.Big0,
 				order: &lendingstate.LendingItem{
@@ -220,7 +220,7 @@ func Test_getCancelFee(t *testing.T) {
 
 		// test getCancelFee: LEND
 		{
-			"SDX/TokenA  test getCancelFee:: LEND",
+			"DAX/TokenA  test getCancelFee:: LEND",
 			CancelFeeArg{
 				borrowFeeRate: new(big.Int).SetUint64(30), // 30/10000= 0.3%
 				order: &lendingstate.LendingItem{
@@ -235,7 +235,7 @@ func Test_getCancelFee(t *testing.T) {
 
 		// test getCancelFee:: BORROW
 		{
-			"SDX/TokenA  test getCancelFee:: BORROW",
+			"DAX/TokenA  test getCancelFee:: BORROW",
 			CancelFeeArg{
 				borrowFeeRate: new(big.Int).SetUint64(30), // 30/10000= 0.3%
 				order: &lendingstate.LendingItem{
@@ -319,7 +319,7 @@ func Test_getCancelFee(t *testing.T) {
 		})
 	}
 
-	// testcase: can't get price of token in SDX
+	// testcase: can't get price of token in DAX
 	testTokenC := common.HexToAddress("0x1400000000000000000000000000000000000004")
 	tomox.SetTokenDecimal(testTokenC, big.NewInt(1))
 	tokenCOrder := CancelFeeArg{

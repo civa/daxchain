@@ -49,7 +49,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"BUY, quote is not SDX, makerFee <= 0.001 SDX",
+			"BUY, quote is not DAX, makerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Bid,
@@ -66,7 +66,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"BUY, quote is not SDX, takerFee <= 0.001 SDX",
+			"BUY, quote is not DAX, takerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Bid,
@@ -83,7 +83,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"BUY, quote is SDX, makerFee <= 0.001 SDX",
+			"BUY, quote is DAX, makerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Bid,
@@ -100,7 +100,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"BUY, quote is SDX, takerFee <= 0.001 SDX",
+			"BUY, quote is DAX, takerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Bid,
@@ -156,7 +156,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"SELL, quote is not SDX, makerFee <= 0.001 SDX",
+			"SELL, quote is not DAX, makerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Ask,
@@ -173,7 +173,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"SELL, quote is not SDX, takerFee <= 0.001 SDX",
+			"SELL, quote is not DAX, takerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Ask,
@@ -190,7 +190,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"SELL, quote is SDX, makerFee <= 0.001 SDX",
+			"SELL, quote is DAX, makerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Ask,
@@ -207,7 +207,7 @@ func TestGetSettleBalance(t *testing.T) {
 			true,
 		},
 		{
-			"SELL, quote is SDX, takerFee <= 0.001 SDX",
+			"SELL, quote is DAX, takerFee <= 0.001 DAX",
 			GetSettleBalanceArg{
 				quotePrice:        common.BasePrice,
 				takerSide:         Ask,

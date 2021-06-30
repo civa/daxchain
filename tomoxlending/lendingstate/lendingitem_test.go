@@ -449,7 +449,7 @@ func TestVerifyBalance(t *testing.T) {
 				tt.fields.Quantity,
 				EtherToWei(big.NewInt(1)),
 				EtherToWei(big.NewInt(1)),
-				EtherToWei(big.NewInt(2)),    // SDX price: 0.5 USD => USD/SDX = 2
+				EtherToWei(big.NewInt(2)),    // DAX price: 0.5 USD => USD/DAX = 2
 				EtherToWei(big.NewInt(8000)), // BTC = 8000 USD
 				tt.fields.Term,
 				tt.fields.LendingId,

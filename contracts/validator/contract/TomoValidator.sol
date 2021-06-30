@@ -37,7 +37,7 @@ contract TomoValidator {
     uint256 public voterWithdrawDelay;
 
     modifier onlyValidCandidateCap {
-        // anyone can deposit X SDX to become a candidate
+        // anyone can deposit X DAX to become a candidate
         require(msg.value >= minCandidateCap);
         _;
     }

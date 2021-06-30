@@ -103,7 +103,7 @@ func main() {
 		log.Fatal("Lending add collateral", err)
 	}
 
-	// SDX Collateral
+	// DAX Collateral
 	nonce = nonce + 1
 	lendingRelayerRegistration.TransactOpts.Nonce = big.NewInt(int64(nonce))
 	_, err = lendingRelayerRegistration.AddCollateral(simulation.TOMONative, simulation.CollateralDepositRate, simulation.CollateralLiquidationRate, simulation.CollateralRecallRate)
@@ -128,12 +128,12 @@ func main() {
 		log.Fatal("Lending add base token USD", err)
 	}
 
-	// SDX lending base
+	// DAX lending base
 	nonce = nonce + 1
 	lendingRelayerRegistration.TransactOpts.Nonce = big.NewInt(int64(nonce))
 	_, err = lendingRelayerRegistration.AddBaseToken(simulation.TOMONative)
 	if err != nil {
-		log.Fatal("Lending add base token SDX", err)
+		log.Fatal("Lending add base token DAX", err)
 	}
 
 	// BTC lending base
@@ -182,15 +182,15 @@ func main() {
 		}
 	*/
 
-	// SDX/BTC
+	// DAX/BTC
 	fromTokens = append(fromTokens, simulation.TOMONative)
 	toTokens = append(toTokens, tokenList[0]["address"].(common.Address))
 
-	// SDX/USDT
+	// DAX/USDT
 	fromTokens = append(fromTokens, simulation.TOMONative)
 	toTokens = append(toTokens, tokenList[9]["address"].(common.Address))
 
-	// ETH/SDX
+	// ETH/DAX
 	fromTokens = append(fromTokens, tokenList[1]["address"].(common.Address))
 	toTokens = append(toTokens, simulation.TOMONative)
 
@@ -281,22 +281,22 @@ func main() {
 	terms = append(terms, big.NewInt(30*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// SDX 1 min
+	// DAX 1 min
 	baseTokens = append(baseTokens, simulation.TOMONative)
 	terms = append(terms, big.NewInt(60))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// SDX 1 day
+	// DAX 1 day
 	baseTokens = append(baseTokens, simulation.TOMONative)
 	terms = append(terms, big.NewInt(86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// SDX 7 days
+	// DAX 7 days
 	baseTokens = append(baseTokens, simulation.TOMONative)
 	terms = append(terms, big.NewInt(7*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))
 
-	// SDX 30 days
+	// DAX 30 days
 	baseTokens = append(baseTokens, simulation.TOMONative)
 	terms = append(terms, big.NewInt(30*86400))
 	collaterals = append(collaterals, common.HexToAddress("0x0"))

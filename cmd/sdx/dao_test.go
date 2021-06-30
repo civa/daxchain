@@ -105,7 +105,7 @@ func testDAOForkBlockNewChain(t *testing.T, test int, genesis string, expectBloc
 	datadir := tmpdir(t)
 	defer os.RemoveAll(datadir)
 
-	// Start a sdx instance with the requested flags set and immediately terminate
+	// Start a dax instance with the requested flags set and immediately terminate
 	if genesis != "" {
 		json := filepath.Join(datadir, "genesis.json")
 		if err := ioutil.WriteFile(json, []byte(genesis), 0600); err != nil {
@@ -115,11 +115,11 @@ func testDAOForkBlockNewChain(t *testing.T, test int, genesis string, expectBloc
 	} else {
 		// Force chain initialization
 		args := []string{"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none", "--ipcdisable", "--datadir", datadir}
-		sdx := runTomo(t, append(args, []string{"--exec", "2+2", "console"}...)...)
-		sdx.WaitExit()
+		dax := runTomo(t, append(args, []string{"--exec", "2+2", "console"}...)...)
+		dax.WaitExit()
 	}
 	// Retrieve the DAO config flag from the database
-	path := filepath.Join(datadir, "sdx", "chaindata")
+	path := filepath.Join(datadir, "dax", "chaindata")
 	db, err := rawdb.NewLevelDBDatabase(path, 0, 0, "")
 	if err != nil {
 		t.Fatalf("test %d: failed to open test database: %v", test, err)

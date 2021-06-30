@@ -736,7 +736,7 @@ func (l *Lending) ProcessCancelOrder(header *types.Header, lendingStateDB *lendi
 		log.Debug("Error when cancel order", "order", &originOrder)
 		return err, false
 	}
-	// relayers pay SDX for masternode
+	// relayers pay DAX for masternode
 	lendingstate.SubRelayerFee(originOrder.Relayer, common.RelayerLendingCancelFee, statedb)
 	masternodeOwner := statedb.GetOwner(coinbase)
 	statedb.AddBalance(masternodeOwner, common.RelayerLendingCancelFee)
@@ -955,12 +955,12 @@ func (l *Lending) GetMediumTradePriceBeforeEpoch(chain consensus.ChainContext, s
 
 //LendToken and CollateralToken must meet at least one of following conditions
 //- Have direct pair in TomoX: lendToken/CollateralToken or CollateralToken/LendToken
-//- Have pairs with SDX:
-//-  lendToken/SDX and CollateralToken/SDX
-//-  SDX/lendToken and SDX/CollateralToken
+//- Have pairs with DAX:
+//-  lendToken/DAX and CollateralToken/DAX
+//-  DAX/lendToken and DAX/CollateralToken
 func (l *Lending) GetCollateralPrices(header *types.Header, chain consensus.ChainContext, statedb *state.StateDB, tradingStateDb *tradingstate.TradingStateDB, collateralToken common.Address, lendingToken common.Address) (*big.Int, *big.Int, error) {
-	// lendTokenTOMOPrice: price of ticker lendToken/SDX
-	// collateralTOMOPrice: price of ticker collateralToken/SDX
+	// lendTokenTOMOPrice: price of ticker lendToken/DAX
+	// collateralTOMOPrice: price of ticker collateralToken/DAX
 	// collateralPrice: price of ticker collateralToken/lendToken
 
 	collateralPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, collateralToken, lendingToken)
@@ -1010,10 +1010,10 @@ func (l *Lending) GetCollateralPrices(header *types.Header, chain consensus.Chai
 	if collateralTOMOPrice == nil || lendTokenTOMOPrice == nil {
 		return common.Big0, common.Big0, nil
 	}
-	// Calculate collateral/LendToken price from collateral/SDX, lendToken/SDX
+	// Calculate collateral/LendToken price from collateral/DAX, lendToken/DAX
 	collateralPrice = new(big.Int).Mul(collateralTOMOPrice, lendingTokenDecimal)
 	collateralPrice = new(big.Int).Div(collateralPrice, lendTokenTOMOPrice)
-	log.Debug("GetCollateralPrices: Calculate collateral/LendToken price from collateral/SDX, lendToken/SDX", "collateralPrice", collateralPrice,
+	log.Debug("GetCollateralPrices: Calculate collateral/LendToken price from collateral/DAX, lendToken/DAX", "collateralPrice", collateralPrice,
 		"collateralTOMOPrice", collateralTOMOPrice, "lendingTokenDecimal", lendingTokenDecimal, "lendTokenTOMOPrice", lendTokenTOMOPrice)
 	return lendTokenTOMOPrice, collateralPrice, nil
 }
@@ -1027,16 +1027,16 @@ func (l *Lending) GetTOMOBasePrices(header *types.Header, chain consensus.ChainC
 		return common.BasePrice, nil
 	} else if tokenTOMOPriceUpdatedFromContract {
 		// getting lendToken price from contract first
-		// otherwise, getting from tomox lendToken/SDX
-		log.Debug("Getting token/SDX price from contract", "price", tokenTOMOPriceFromContract)
+		// otherwise, getting from tomox lendToken/DAX
+		log.Debug("Getting token/DAX price from contract", "price", tokenTOMOPriceFromContract)
 		return tokenTOMOPriceFromContract, nil
 	} else {
 		tomoTokenPriceFromContract, updatedBlock := lendingstate.GetCollateralPrice(statedb, common.HexToAddress(common.TomoNativeAddress), token)
 		tomoTokenPriceUpdatedFromContract := updatedBlock.Uint64()/chain.Config().Posv.Epoch == header.Number.Uint64()/chain.Config().Posv.Epoch
 		if tomoTokenPriceUpdatedFromContract && tomoTokenPriceFromContract != nil && tomoTokenPriceFromContract.Sign() > 0 {
 			// getting lendToken price from contract first
-			// otherwise, getting from tomox lendToken/SDX
-			log.Debug("Getting SDX/token from contract", "price", tomoTokenPriceFromContract)
+			// otherwise, getting from tomox lendToken/DAX
+			log.Debug("Getting DAX/token from contract", "price", tomoTokenPriceFromContract)
 			tokenDecimal, err := l.tomox.GetTokenDecimal(chain, statedb, token)
 			log.Debug("GetTokenDecimal", "token", token.Hex(), "err", err)
 			if err != nil || tokenDecimal == nil || tokenDecimal.Sign() == 0 {
@@ -1051,7 +1051,7 @@ func (l *Lending) GetTOMOBasePrices(header *types.Header, chain consensus.ChainC
 			return nil, err
 		}
 		if tokenTOMOPrice != nil && tokenTOMOPrice.Sign() > 0 {
-			log.Debug("Getting token/SDX from tomox", "price", tokenTOMOPrice, "err", err)
+			log.Debug("Getting token/DAX from tomox", "price", tokenTOMOPrice, "err", err)
 			return tokenTOMOPrice, nil
 		}
 	}

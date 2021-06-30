@@ -4,7 +4,7 @@ default: build
 
 build:
 	go build -o bin/swarm    github.com/tomochain/tomochain/cmd/swarm
-	go build -o bin/sdx     github.com/tomochain/tomochain/cmd/sdx
+	go build -o bin/dax     github.com/tomochain/tomochain/cmd/dax
 	go build -o bin/bootnode github.com/tomochain/tomochain/cmd/bootnode
 
 cluster: build

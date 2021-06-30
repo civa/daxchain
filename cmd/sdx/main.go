@@ -41,7 +41,7 @@ import (
 )
 
 const (
-	clientIdentifier = "sdx" // Client identifier to advertise over the network
+	clientIdentifier = "dax" // Client identifier to advertise over the network
 )
 
 var (
@@ -153,8 +153,8 @@ var (
 )
 
 func init() {
-	// Initialize the CLI app and start sdx
-	app.Action = sdx
+	// Initialize the CLI app and start dax
+	app.Action = dax
 	app.HideVersion = true // we have a command to print the version
 	app.Copyright = "Copyright (c) 2018 Tomochain"
 	app.Commands = []cli.Command{
@@ -210,10 +210,10 @@ func main() {
 	}
 }
 
-// sdx is the main entry point into the system if no special subcommand is ran.
+// dax is the main entry point into the system if no special subcommand is ran.
 // It creates a default node based on the command line arguments and runs it in
 // blocking mode, waiting for it to be shut down.
-func sdx(ctx *cli.Context) error {
+func dax(ctx *cli.Context) error {
 	node, cfg := makeFullNode(ctx)
 	startNode(ctx, node, cfg)
 	node.Wait()

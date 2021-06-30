@@ -26,7 +26,7 @@ import (
 
 func TestEchangeStates(t *testing.T) {
 	t.SkipNow()
-	orderBook := common.StringToHash("BTC/SDX")
+	orderBook := common.StringToHash("BTC/DAX")
 	numberOrder := 20000
 	orderItems := []LendingItem{}
 	relayers := []common.Hash{}
@@ -113,7 +113,7 @@ func TestEchangeStates(t *testing.T) {
 }
 
 func TestRevertStates(t *testing.T) {
-	orderBook := common.StringToHash("BTC/SDX")
+	orderBook := common.StringToHash("BTC/DAX")
 	numberOrder := 20
 	orderItems := []LendingItem{}
 	relayers := []common.Hash{}
@@ -222,7 +222,7 @@ func TestRevertStates(t *testing.T) {
 }
 
 func TestDumpStates(t *testing.T) {
-	orderBook := common.StringToHash("BTC/SDX")
+	orderBook := common.StringToHash("BTC/DAX")
 	numberOrder := 20
 	orderItems := []LendingItem{}
 	relayers := []common.Hash{}

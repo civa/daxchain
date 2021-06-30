@@ -272,8 +272,8 @@ func (c *Console) AutoCompleteInput(line string, pos int) (string, []string, str
 // Welcome show summary of current Geth instance and some metadata about the
 // console's available modules.
 func (c *Console) Welcome() {
-	// Print some generic Sdx metadata
-	fmt.Fprintf(c.printer, "Welcome to the Sdx JavaScript console!\n\n")
+	// Print some generic Dax metadata
+	fmt.Fprintf(c.printer, "Welcome to the Dax JavaScript console!\n\n")
 	c.jsre.Run(`
 		console.log("instance: " + web3.version.node);
 		console.log("coinbase: " + eth.coinbase);

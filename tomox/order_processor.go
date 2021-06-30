@@ -237,18 +237,18 @@ func (tomox *TomoX) processOrderList(coinbase common.Address, chain consensus.Ch
 		var quotePrice *big.Int
 		if oldestOrder.QuoteToken.String() != common.TomoNativeAddress {
 			quotePrice = tradingStateDB.GetLastPrice(tradingstate.GetTradingOrderBookHash(oldestOrder.QuoteToken, common.HexToAddress(common.TomoNativeAddress)))
-			log.Debug("TryGet quotePrice QuoteToken/SDX", "quotePrice", quotePrice)
+			log.Debug("TryGet quotePrice QuoteToken/DAX", "quotePrice", quotePrice)
 			if quotePrice == nil || quotePrice.Sign() == 0 {
 				inversePrice := tradingStateDB.GetLastPrice(tradingstate.GetTradingOrderBookHash(common.HexToAddress(common.TomoNativeAddress), oldestOrder.QuoteToken))
 				quoteTokenDecimal, err := tomox.GetTokenDecimal(chain, statedb, oldestOrder.QuoteToken)
 				if err != nil || quoteTokenDecimal.Sign() == 0 {
 					return nil, nil, nil, fmt.Errorf("Fail to get tokenDecimal. Token: %v . Err: %v", oldestOrder.QuoteToken.String(), err)
 				}
-				log.Debug("TryGet inversePrice SDX/QuoteToken", "inversePrice", inversePrice)
+				log.Debug("TryGet inversePrice DAX/QuoteToken", "inversePrice", inversePrice)
 				if inversePrice != nil && inversePrice.Sign() > 0 {
 					quotePrice = new(big.Int).Mul(common.BasePrice, quoteTokenDecimal)
 					quotePrice = new(big.Int).Div(quotePrice, inversePrice)
-					log.Debug("TryGet quotePrice after get inversePrice SDX/QuoteToken", "quotePrice", quotePrice, "quoteTokenDecimal", quoteTokenDecimal)
+					log.Debug("TryGet quotePrice after get inversePrice DAX/QuoteToken", "quotePrice", quotePrice, "quoteTokenDecimal", quoteTokenDecimal)
 				}
 			}
 		} else {
@@ -651,10 +651,10 @@ func (tomox *TomoX) ProcessCancelOrder(header *types.Header, tradingStateDB *tra
 		log.Debug("Error when cancel order", "order", order)
 		return err, false
 	}
-	// relayers pay SDX for masternode
+	// relayers pay DAX for masternode
 	tradingstate.SubRelayerFee(originOrder.ExchangeAddress, common.RelayerCancelFee, statedb)
 	masternodeOwner := statedb.GetOwner(coinbase)
-	// relayers pay SDX for masternode
+	// relayers pay DAX for masternode
 	statedb.AddBalance(masternodeOwner, common.RelayerCancelFee)
 
 	relayerOwner := tradingstate.GetRelayerOwner(originOrder.ExchangeAddress, statedb)
@@ -687,14 +687,14 @@ func (tomox *TomoX) ProcessCancelOrder(header *types.Header, tradingStateDB *tra
 func getCancelFeeV1(baseTokenDecimal *big.Int, feeRate *big.Int, order *tradingstate.OrderItem) *big.Int {
 	cancelFee := big.NewInt(0)
 	if order.Side == tradingstate.Ask {
-		// SELL 1 BTC => SDX ,,
+		// SELL 1 BTC => DAX ,,
 		// order.Quantity =1 && fee rate =2
 		// ==> cancel fee = 2/10000
 		// order.Quantity already included baseToken decimal
 		cancelFee = new(big.Int).Mul(order.Quantity, feeRate)
 		cancelFee = new(big.Int).Div(cancelFee, common.TomoXBaseCancelFee)
 	} else {
-		// BUY 1 BTC => SDX with Price : 10000
+		// BUY 1 BTC => DAX with Price : 10000
 		// quoteTokenQuantity = 10000 && fee rate =2
 		// => cancel fee =2
 		quoteTokenQuantity := new(big.Int).Mul(order.Quantity, order.Price)

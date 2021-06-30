@@ -192,7 +192,7 @@ func TestSendLending(t *testing.T) {
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: USD, collateral: SDX
+		// lendToken: USD, collateral: DAX
 		// amount 1000 USD
 		testSendLending(key, nonce, USDAddress, common.Address{}, new(big.Int).Mul(_1E8, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
@@ -201,7 +201,7 @@ func TestSendLending(t *testing.T) {
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: BTC, collateral: SDX
+		// lendToken: BTC, collateral: DAX
 		// amount 1 BTC
 		testSendLending(key, nonce, BTCAddress, common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
@@ -219,8 +219,8 @@ func TestSendLending(t *testing.T) {
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: SDX, collateral: BTC
-		// amount 1000 SDX
+		// lendToken: DAX, collateral: BTC
+		// amount 1000 DAX
 		testSendLending(key, nonce, common.HexToAddress(common.TomoNativeAddress), common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)
@@ -228,8 +228,8 @@ func TestSendLending(t *testing.T) {
 		nonce++
 		time.Sleep(time.Second)
 
-		// lendToken: SDX, collateral: ETH
-		// amount 1000 SDX
+		// lendToken: DAX, collateral: ETH
+		// amount 1000 DAX
 		testSendLending(key, nonce, common.HexToAddress(common.TomoNativeAddress), common.Address{}, new(big.Int).Mul(_1E18, big.NewInt(1000)), interestRate, lendingstate.Investing, lendingstate.LendingStatusNew, true, 0, 0, common.Hash{}, "")
 		nonce++
 		time.Sleep(time.Second)

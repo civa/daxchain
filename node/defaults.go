@@ -59,7 +59,7 @@ func DefaultDataDir() string {
 		} else if runtime.GOOS == "windows" {
 			return filepath.Join(home, "AppData", "Roaming", "Tomochain")
 		} else {
-			return filepath.Join(home, ".sdx")
+			return filepath.Join(home, ".dax")
 		}
 	}
 	// As we cannot guess a stable location, return empty and handle later

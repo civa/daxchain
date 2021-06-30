@@ -40,26 +40,26 @@ const (
 func TestConsoleWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 
-	// Start a sdx console, make sure it's cleaned up and terminate the console
-	sdx := runTomo(t,
+	// Start a dax console, make sure it's cleaned up and terminate the console
+	dax := runTomo(t,
 		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase,
 		"console")
 
 	// Gather all the infos the welcome message needs to contain
-	sdx.SetTemplateFunc("goos", func() string { return runtime.GOOS })
-	sdx.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
-	sdx.SetTemplateFunc("gover", runtime.Version)
-	sdx.SetTemplateFunc("tomover", func() string { return params.Version })
-	sdx.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
-	sdx.SetTemplateFunc("apis", func() string { return ipcAPIs })
+	dax.SetTemplateFunc("goos", func() string { return runtime.GOOS })
+	dax.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
+	dax.SetTemplateFunc("gover", runtime.Version)
+	dax.SetTemplateFunc("tomover", func() string { return params.Version })
+	dax.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
+	dax.SetTemplateFunc("apis", func() string { return ipcAPIs })
 
 	// Verify the actual welcome message to the required template
-	sdx.Expect(`
-Welcome to the Sdx JavaScript console!
+	dax.Expect(`
+Welcome to the Dax JavaScript console!
 
-instance: sdx/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
+instance: dax/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{.Etherbase}}
 at block: 0 ({{niltime}})
  datadir: {{.Datadir}}
@@ -67,7 +67,7 @@ at block: 0 ({{niltime}})
 
 > {{.InputLine "exit"}}
 `)
-	sdx.ExpectExit()
+	dax.ExpectExit()
 }
 
 // Tests that a console can be attached to a running node via various means.
@@ -76,57 +76,57 @@ func TestIPCAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	var ipc string
 	if runtime.GOOS == "windows" {
-		ipc = `\\.\pipe\sdx` + strconv.Itoa(trulyRandInt(100000, 999999))
+		ipc = `\\.\pipe\dax` + strconv.Itoa(trulyRandInt(100000, 999999))
 	} else {
 		ws := tmpdir(t)
 		defer os.RemoveAll(ws)
-		ipc = filepath.Join(ws, "sdx.ipc")
+		ipc = filepath.Join(ws, "dax.ipc")
 	}
-	sdx := runTomo(t,
+	dax := runTomo(t,
 		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--ipcpath", ipc)
 
 	time.Sleep(2 * time.Second) // Simple way to wait for the RPC endpoint to open
-	testAttachWelcome(t, sdx, "ipc:"+ipc, ipcAPIs)
+	testAttachWelcome(t, dax, "ipc:"+ipc, ipcAPIs)
 
-	sdx.Interrupt()
-	sdx.ExpectExit()
+	dax.Interrupt()
+	dax.ExpectExit()
 }
 
 func TestHTTPAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	port := strconv.Itoa(trulyRandInt(1024, 65536)) // Yeah, sometimes this will fail, sorry :P
-	sdx := runTomo(t,
+	dax := runTomo(t,
 		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--rpc", "--rpcport", port)
 
 	time.Sleep(2 * time.Second) // Simple way to wait for the RPC endpoint to open
-	testAttachWelcome(t, sdx, "http://localhost:"+port, httpAPIs)
+	testAttachWelcome(t, dax, "http://localhost:"+port, httpAPIs)
 
-	sdx.Interrupt()
-	sdx.ExpectExit()
+	dax.Interrupt()
+	dax.ExpectExit()
 }
 
 func TestWSAttachWelcome(t *testing.T) {
 	coinbase := "0x8605cdbbdb6d264aa742e77020dcbc58fcdce182"
 	port := strconv.Itoa(trulyRandInt(1024, 65536)) // Yeah, sometimes this will fail, sorry :P
 
-	sdx := runTomo(t,
+	dax := runTomo(t,
 		"--tomox.datadir", tmpdir(t)+"tomox/"+time.Now().String(),
 		"--port", "0", "--maxpeers", "0", "--nodiscover", "--nat", "none",
 		"--etherbase", coinbase, "--ws", "--wsport", port)
 
 	time.Sleep(2 * time.Second) // Simple way to wait for the RPC endpoint to open
-	testAttachWelcome(t, sdx, "ws://localhost:"+port, httpAPIs)
+	testAttachWelcome(t, dax, "ws://localhost:"+port, httpAPIs)
 
-	sdx.Interrupt()
-	sdx.ExpectExit()
+	dax.Interrupt()
+	dax.ExpectExit()
 }
 
-func testAttachWelcome(t *testing.T, sdx *testtomo, endpoint, apis string) {
-	// Attach to a running sdx note and terminate immediately
+func testAttachWelcome(t *testing.T, dax *testtomo, endpoint, apis string) {
+	// Attach to a running dax note and terminate immediately
 	attach := runTomo(t, "attach", endpoint)
 	defer attach.ExpectExit()
 	attach.CloseStdin()
@@ -136,17 +136,17 @@ func testAttachWelcome(t *testing.T, sdx *testtomo, endpoint, apis string) {
 	attach.SetTemplateFunc("goarch", func() string { return runtime.GOARCH })
 	attach.SetTemplateFunc("gover", runtime.Version)
 	attach.SetTemplateFunc("tomover", func() string { return params.Version })
-	attach.SetTemplateFunc("etherbase", func() string { return sdx.Etherbase })
+	attach.SetTemplateFunc("etherbase", func() string { return dax.Etherbase })
 	attach.SetTemplateFunc("niltime", func() string { return time.Unix(1544771829, 0).Format(time.RFC1123) })
 	attach.SetTemplateFunc("ipc", func() bool { return strings.HasPrefix(endpoint, "ipc") })
-	attach.SetTemplateFunc("datadir", func() string { return sdx.Datadir })
+	attach.SetTemplateFunc("datadir", func() string { return dax.Datadir })
 	attach.SetTemplateFunc("apis", func() string { return apis })
 
 	// Verify the actual welcome message to the required template
 	attach.Expect(`
-Welcome to the Sdx JavaScript console!
+Welcome to the Dax JavaScript console!
 
-instance: sdx/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
+instance: dax/v{{tomover}}/{{goos}}-{{goarch}}/{{gover}}
 coinbase: {{etherbase}}
 at block: 0 ({{niltime}}){{if ipc}}
  datadir: {{datadir}}{{end}}

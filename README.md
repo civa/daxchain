@@ -13,8 +13,8 @@ We are working to create an alternative, scalable financial system which is more
 TomoChain relies on a system of 150 Masternodes with a Proof of Stake Voting consensus that can support near-zero fee, and 2-second transaction confirmation times.
 Security, stability, and chain finality are guaranteed via novel techniques such as double validation, staking via smart-contracts, and "true" randomization processes.
 
-Tomochain supports all EVM-compatible smart-contracts, protocols, and atomic cross-chain token transfers.
-New scaling techniques such as sharding, private-chain generation, and hardware integration will be continuously researched and incorporated into Tomochain's masternode architecture. This architecture will be an ideal scalable smart-contract public blockchain for decentralized apps, token issuances, and token integrations for small and big businesses.
+Daxchain supports all EVM-compatible smart-contracts, protocols, and atomic cross-chain token transfers.
+New scaling techniques such as sharding, private-chain generation, and hardware integration will be continuously researched and incorporated into Daxchain's masternode architecture. This architecture will be an ideal scalable smart-contract public blockchain for decentralized apps, token issuances, and token integrations for small and big businesses.
 
 More details can be found at our [technical white paper](https://tomochain.com/docs/technical-whitepaper---1.0.pdf)
 
@@ -27,7 +27,7 @@ Read more about us on:
 
 ## Building the source
 
-Tomochain provides a client binary called `dax` for both running a masternode and running a full-node.
+Daxchain provides a client binary called `dax` for both running a masternode and running a full-node.
 Building `dax` requires both a Go (1.7+) and C compiler; install both of these.
 
 Once the dependencies are installed, just run the below commands:
@@ -47,7 +47,7 @@ Alternatively, you could quickly download our pre-complied binary from our [gith
 Please refer to the [official documentation](https://docs.tomochain.com/get-started/run-node/) on how to run a node if your goal is to run a masternode.
 The recommanded ways of running a node and applying to become a masternode are explained in detail there.
 
-### Attaching to the Tomochain test network
+### Attaching to the Daxchain test network
 
 We published our test network 2.0 with full implementation of PoSV consensus at https://stats.testnet.tomochain.com.
 If you'd like to experiment with smart contract creation and DApps, you might be interested to give these a try on our Testnet.

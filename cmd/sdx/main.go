@@ -156,7 +156,7 @@ func init() {
 	// Initialize the CLI app and start dax
 	app.Action = dax
 	app.HideVersion = true // we have a command to print the version
-	app.Copyright = "Copyright (c) 2018 Tomochain"
+	app.Copyright = "Copyright (c) 2018 Daxchain"
 	app.Commands = []cli.Command{
 		// See chaincmd.go:
 		initCommand,

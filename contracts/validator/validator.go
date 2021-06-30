@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Tomochain
+// Copyright (c) 2018 Daxchain
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
@@ -44,10 +44,10 @@ func NewValidator(transactOpts *bind.TransactOpts, contractAddr common.Address, 
 
 func DeployValidator(transactOpts *bind.TransactOpts, contractBackend bind.ContractBackend, validatorAddress []common.Address, caps []*big.Int, ownerAddress common.Address) (common.Address, *Validator, error) {
 	minDeposit := new(big.Int)
-	minDeposit.SetString("50000000000000000000000", 10)
+	minDeposit.SetString("40000000000000000000000", 10)
 	minVoterCap := new(big.Int)
 	minVoterCap.SetString("10000000000000000000", 10)
-	// Deposit 50K DAX
+	// Deposit 40K DAX
 	// Min Voter Cap 10 DAX
 	// 150 masternodes
 	// Candidate Delay Withdraw 30 days = 1296000 blocks

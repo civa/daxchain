@@ -32,7 +32,7 @@ var (
 var (
 	// TomoChain mainnet config
 	TomoMainnetChainConfig = &ChainConfig{
-		ChainId:        big.NewInt(937),
+		ChainId:        big.NewInt(142),
 		HomesteadBlock: big.NewInt(1),
 		EIP150Block:    big.NewInt(2),
 		EIP150Hash:     common.HexToHash("0x0000000000000000000000000000000000000000000000000000000000000000"),

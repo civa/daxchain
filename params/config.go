@@ -30,7 +30,7 @@ var (
 )
 
 var (
-	// TomoChain mainnet config
+	// DAX Chain mainnet config
 	TomoMainnetChainConfig = &ChainConfig{
 		ChainId:        big.NewInt(142),
 		HomesteadBlock: big.NewInt(1),
